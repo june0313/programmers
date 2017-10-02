@@ -1,14 +1,13 @@
 package programmers.level_2.min;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.stream.IntStream;
 
 class TryHelloWorld {
     public int getMinSum(int[] A, int[] B) {
-        Integer[] a = Arrays.stream(A).boxed().sorted().toArray(Integer[]::new);
-        Integer[] b = Arrays.stream(B).boxed().sorted(Comparator.reverseOrder()).toArray(Integer[]::new);
-        return IntStream.range(0, A.length).map(i -> a[i] * b[i]).sum();
+        Arrays.sort(A);
+        Arrays.sort(B);
+        return IntStream.range(0, A.length).map(i -> A[i] * B[B.length - i - 1]).sum();
     }
 
     public static void main(String[] args) {
