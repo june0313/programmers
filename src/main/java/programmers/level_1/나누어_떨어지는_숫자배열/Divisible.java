@@ -1,4 +1,4 @@
-package programmers.level_1.최대값과_최소값;
+package programmers.level_1.나누어_떨어지는_숫자배열;
 
 import java.util.Arrays;
 
