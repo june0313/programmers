@@ -22,21 +22,21 @@ public class GroupWordCounterTest {
     @Test
     public void countTest() throws Exception {
         List<String> words = Arrays.asList("happy", "new", "year");
-        int count = groupWordCounter.getGroupWordCount(words);
-        assertThat(count, is(3));
+        long count = groupWordCounter.getGroupWordCount(words);
+        assertThat(count, is(3L));
     }
 
     @Test
     public void countTest2() throws Exception {
         List<String> words = Collections.singletonList("ccazzzzbb");
-        int count = groupWordCounter.getGroupWordCount(words);
-        assertThat(count, is(1));
+        long count = groupWordCounter.getGroupWordCount(words);
+        assertThat(count, is(1L));
     }
 
     @Test
     public void countTest3() throws Exception {
         List<String> words = Arrays.asList("kin", "aabbbccb");
-        int count = groupWordCounter.getGroupWordCount(words);
-        assertThat(count, is(1));
+        long count = groupWordCounter.getGroupWordCount(words);
+        assertThat(count, is(1L));
     }
 }

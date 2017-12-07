@@ -21,31 +21,21 @@ public class Main {
             words.add(sc.nextLine());
         }
 
-        int count = new Main().getGroupWordCount(words);
+        long count = new Main().getGroupWordCount(words);
         System.out.println(count);
     }
 
-    public int getGroupWordCount(List<String> words) {
-        int count = 0;
-
-        for (String word : words) {
-            if (isGroupWord(word)) {
-                count++;
-            }
-        }
-
-        return count;
+    public long getGroupWordCount(List<String> words) {
+        return words.stream().filter(this::isGroupWord).count();
     }
 
     private boolean isGroupWord(String word) {
         char previousChar = word.charAt(0);
-        Map<Character, Boolean> usedMap = new HashMap<>();
+        Set<Character> usedChar = new HashSet<>();
 
         for (char c : word.toCharArray()) {
-            if (usedMap.getOrDefault(c, false) && c != previousChar) {
-                return false;
-            }
-            usedMap.put(c, true);
+            if (usedChar.contains(c) && c != previousChar) return false;
+            usedChar.add(c);
             previousChar = c;
         }
 
