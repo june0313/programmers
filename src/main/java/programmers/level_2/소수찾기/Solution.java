@@ -11,24 +11,14 @@ public class Solution {
     }
 
     private void findAllPermutation(String prefix, String postfix) {
-        if (postfix.length() == 0) {
+        if (!prefix.equals("")) {
             allSubSet.add(Integer.valueOf(prefix));
-            return;
         }
 
         for (int i = 0; i < postfix.length(); i++) {
-
-            if (!prefix.equals("")) {
-                allSubSet.add(Integer.valueOf(prefix));
-            }
-
-            StringBuilder postfixBuilder = new StringBuilder();
-            for (int k = 0; k < postfix.length(); k++) {
-                if (k == i) continue;
-                postfixBuilder.append(postfix.charAt(k));
-            }
-
-            findAllPermutation(prefix + postfix.charAt(i), postfixBuilder.toString());
+            final String newPrefix = prefix + postfix.charAt(i);
+            final String newPostfix = postfix.substring(0, i) + postfix.substring(i + 1);
+            findAllPermutation(newPrefix, newPostfix);
         }
     }
 
