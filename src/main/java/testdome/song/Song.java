@@ -1,5 +1,7 @@
 package testdome.song;
 
+import java.util.*;
+
 public class Song {
     private String name;
     private Song nextSong;
@@ -13,12 +15,15 @@ public class Song {
     }
 
     public boolean isRepeatingPlaylist() {
+        Set<Song> songsSet = new HashSet<>();
+
         Song nextSong = this.nextSong;
 
         while(nextSong != null) {
-            if(nextSong == this)  {
+            if (!songsSet.add(nextSong)) {
                 return true;
             }
+
             nextSong = nextSong.nextSong;
         }
 
