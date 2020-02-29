@@ -1,21 +1,18 @@
 package testdome.train;
 
-import java.util.Hashtable;
 import java.util.function.Function;
 
 public class Train {
-    private Hashtable<Integer, Integer> wagons;
+    private int wagonCount;
+    private Function<Integer, Integer> wagonCargoFunction;
 
     public Train(int wagonCount, Function<Integer, Integer> fillWagon) {
-        this.wagons = new Hashtable<>();
-
-        for (int i = 0; i < wagonCount; i++) {
-            this.wagons.put(i, fillWagon.apply(i));
-        }
+        this.wagonCount = wagonCount;
+        this.wagonCargoFunction = fillWagon;
     }
 
     public int peekWagon(int wagonIndex) {
-        return this.wagons.get(wagonIndex);
+        return wagonCargoFunction.apply(wagonIndex);
     }
 
     public static void main(String[] args) {
