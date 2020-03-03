@@ -1,31 +1,32 @@
 package programmers.highscorekit.level_2.다리를_지나는_트럭;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Optional;
+import java.util.Queue;
+import java.util.stream.Stream;
+
+import static java.util.stream.Collectors.toCollection;
 
 public class Truck {
     public int solution(int bridgeLength, int weight, int[] truckWeights) {
-        Queue<Integer> trucks = new LinkedList<>();
-        Arrays.stream(truckWeights).forEach(trucks::offer);
-
-        Queue<Integer> bridge = new LinkedList<>();
-        for (int i = 0; i < bridgeLength; i++) {
-            bridge.add(0);
-        }
+        Queue<Integer> waitingTrucks = Arrays.stream(truckWeights).boxed().collect(toCollection(LinkedList::new));
+        Queue<Integer> bridge = Stream.generate(() -> 0).limit(bridgeLength).collect(toCollection(LinkedList::new));
 
         int totalWeightOfTrucksOnBridge = 0;
         int crossedTrucksCount = 0;
         int elapsedTime = 0;
 
         while (crossedTrucksCount < truckWeights.length) {
-            Integer truckWeight = Optional.ofNullable(bridge.poll()).orElse(0);
-            totalWeightOfTrucksOnBridge -= truckWeight;
+            Integer crossedTruckWeight = Optional.ofNullable(bridge.poll()).orElse(0);
+            totalWeightOfTrucksOnBridge -= crossedTruckWeight;
 
-            if (truckWeight != 0) {
+            if (crossedTruckWeight != 0) {
                 crossedTrucksCount++;
             }
 
-            if (!trucks.isEmpty() && totalWeightOfTrucksOnBridge + trucks.peek() <= weight) {
-                Integer nextTruckWeight = trucks.poll();
+            if (!waitingTrucks.isEmpty() && totalWeightOfTrucksOnBridge + waitingTrucks.peek() <= weight) {
+                Integer nextTruckWeight = waitingTrucks.poll();
                 bridge.offer(nextTruckWeight);
                 totalWeightOfTrucksOnBridge += nextTruckWeight;
             } else {
