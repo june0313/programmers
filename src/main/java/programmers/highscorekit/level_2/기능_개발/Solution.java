@@ -4,16 +4,15 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int[] progresses, int[] speeds) {
-        List<Task> tasks = new ArrayList<>();
+        Queue<Task> queue = new LinkedList<>();
         for (int i = 0; i < progresses.length; i++) {
-            tasks.add(new Task(progresses[i], speeds[i]));
+            queue.add(new Task(progresses[i], speeds[i]));
         }
 
-        Queue<Task> queue = new LinkedList<>(tasks);
-        Queue<Integer> answer = new LinkedList<>();
+        List<Integer> answer = new ArrayList<>();
 
         while (!queue.isEmpty()) {
-            tasks.forEach(Task::work);
+            queue.forEach(Task::work);
 
             int releasedTaskCount = 0;
             while (!queue.isEmpty() && queue.peek().progress >= 100) {
@@ -22,7 +21,7 @@ class Solution {
             }
 
             if (releasedTaskCount > 0) {
-                answer.offer(releasedTaskCount);
+                answer.add(releasedTaskCount);
             }
         }
 
