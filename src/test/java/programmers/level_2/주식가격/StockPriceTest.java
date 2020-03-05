@@ -20,4 +20,10 @@ public class StockPriceTest {
         int[] result = sut.solution(new int[]{1, 2, 3, 2, 3});
         assertThat(result, is(new int[]{4, 3, 1, 1, 0}));
     }
+
+    @Test
+    public void test2() {
+        int[] result = sut.solution(new int[]{2, 1, 2, 3, 1});
+        assertThat(result, is(new int[]{1, 3, 2, 1, 0}));
+    }
 }
