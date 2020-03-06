@@ -6,12 +6,9 @@ public class StockPrice {
 
         for (int i = 0; i < prices.length; i++) {
             for (int k = i + 1; k < prices.length; k++) {
+                answer[i] = k - i;
                 if (prices[i] > prices[k]) {
-                    answer[i] = k - i;
                     break;
-                }
-                if (k == prices.length - 1) {
-                    answer[i] = k - i;
                 }
             }
         }
